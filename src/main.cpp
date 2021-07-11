@@ -4,6 +4,7 @@
 #include <random>
 
 #ifdef PARALLEL
+#include <array>
 #include <bitset>
 #include <filesystem>
 #include <fstream>
