@@ -9,6 +9,7 @@ TFLAGS  = -pthread
 # command
 OPEN      = /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe /c start
 VISUALIZE = cargo run --manifest-path $(VISUALIZER_DIR)/Cargo.toml --release --bin vis
+GENERATE  = cargo run --manifest-path $(VISUALIZER_DIR)/Cargo.toml --release --bin gen
 PYTHON    = python3
 FFMPEG    = ffmpeg
 
@@ -41,7 +42,8 @@ SNAPSHOT_OUT   = $(EXECUTABLE_DIR)/snapshot.out
 CALC_SCORE_OUT = $(UTILITY_DIR)/calc_score.out
 
 # default
-case = 0000
+case  = 0000
+files = 500
 
 all:	$(NORMAL_OUT) $(DEBUG_OUT) $(PARALLEL_OUT) $(SNAPSHOT_OUT) $(CALC_SCORE_OUT)
 clean:
@@ -58,6 +60,17 @@ $(SNAPSHOT_OUT): $(SRC)
 	$(CXX) $(STD) $(WFLAGS) $(OFLAGS) -DSNAPSHOT $(SRC) $(TFLAGS) -o $(SNAPSHOT_OUT)
 $(CALC_SCORE_OUT): $(CALC_SCORE_SRC)
 	$(CXX) $(STD) $(WFLAGS) $(OFLAGS) $(CALC_SCORE_SRC) -o $(CALC_SCORE_OUT)
+
+gen:
+	rm -f $(TMP); \
+	rm -rf $(TEST_IN_DIR); \
+	i=0 \
+	&& while [ "$$i" -lt $(files) ]; do \
+		echo "$$i" >> $(TMP) \
+		&& i=$$(( i + 1 )); \
+	done \
+	&& $(GENERATE) $(TMP) \
+	&& mv in/ $(TEST_IN_DIR)/
 
 normal: $(NORMAL_OUT) $(CALC_SCORE_OUT)
 	$(NORMAL_OUT) < $(TEST_IN_DIR)/$(case).txt > $(TMP) \
