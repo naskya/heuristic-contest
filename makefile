@@ -8,19 +8,19 @@ TFLAGS  = -pthread
 
 # command
 OPEN      = /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe /c start
-VISUALIZE	= cargo run --manifest-path $(VISUALIZER_DIR)/Cargo.toml --release --bin vis
+VISUALIZE = cargo run --manifest-path $(VISUALIZER_DIR)/Cargo.toml --release --bin vis
 PYTHON    = python3
 FFMPEG    = ffmpeg
 
 # directory
-TEST_IN_DIR     = test/in
-TEST_OUT_DIR    = test/out
-SNAPSHOT_DIR    = snapshot
-PNG_DIR         = png
-VISUALIZER_DIR	= visualizer
-EXECUTABLE_DIR	= executable
-SRC_DIR         = src
-UTILITY_DIR     = utility
+TEST_IN_DIR    = test/in
+TEST_OUT_DIR   = test/out
+SNAPSHOT_DIR   = snapshot
+PNG_DIR        = png
+VISUALIZER_DIR = visualizer
+EXECUTABLE_DIR = executable
+SRC_DIR        = src
+UTILITY_DIR    = utility
 
 # source file
 SRC            = $(SRC_DIR)/main.cpp
