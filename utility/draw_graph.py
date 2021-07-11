@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+def main(testcase_name):
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    test_in = dirname + "/../test/in/" + testcase_name + ".txt"
+    out_dir = dirname + "/../snapshot/"
+    score_prog = dirname + "/calc_score.out"
+    files = len(os.listdir(out_dir))
+
+    data = [0] * files
+
+    for file in os.listdir(out_dir):
+        if len(file) < 4 or file[4:] != ".txt":
+            files -= 1
+            continue
+        # int("0000.txt"[:4]) = int("0000") = 0
+        data[int(file[:4])] = int(os.popen("cat " + test_in +
+                                           " " + out_dir + file + " | " + score_prog).read())
+
+    assert max(data) != min(data)
+
+    plt.figure(figsize=(12, 9), dpi=100)
+    plt.plot([i for i in range(files)], data[:files])
+    plt.yticks(np.arange(min(data), max(data),
+                         step=(max(data) - min(data)) // 5))
+    plt.savefig(dirname + "/../score_graph.png")
+
+if __name__ == "__main__":
+    main(input())

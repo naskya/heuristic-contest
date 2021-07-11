@@ -1,0 +1,8 @@
+visualizer/*
+!visualizer/.gitkeep
+
+*.txt
+*.out
+*.svg
+*.png
+*.mov
