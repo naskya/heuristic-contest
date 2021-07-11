@@ -15,7 +15,7 @@ FFMPEG    = ffmpeg
 # directory
 TEST_IN_DIR    = test/in
 TEST_OUT_DIR   = test/out
-SNAPSHOT_DIR   = snapshot
+SNAPSHOT_DIR   = test/snapshot
 PNG_DIR        = png
 VISUALIZER_DIR = visualizer
 EXECUTABLE_DIR = executable

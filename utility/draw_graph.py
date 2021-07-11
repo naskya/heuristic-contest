@@ -5,7 +5,7 @@ import os
 def main(testcase_name):
     dirname = os.path.dirname(os.path.abspath(__file__))
     test_in = dirname + "/../test/in/" + testcase_name + ".txt"
-    out_dir = dirname + "/../snapshot/"
+    out_dir = dirname + "/../test/snapshot/"
     score_prog = dirname + "/calc_score.out"
     files = len(os.listdir(out_dir))
 

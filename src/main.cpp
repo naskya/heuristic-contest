@@ -191,7 +191,7 @@ int main() {
   result res;
   std::thread job(solve, std::ref(std::cin), std::ref(res));
 
-  const std::string SNAPSHOT_OUT_DIR = "snapshot/";
+  const std::string SNAPSHOT_OUT_DIR = "test/snapshot/";
   unsigned num                       = 0;
 
   const utility::timer tm;
