@@ -123,15 +123,15 @@ void solve(std::istream& is, result& res) {
 
 int main() {
 #ifdef PARALLEL
-  constexpr std::string_view TEST_IN_DIRECTORY = "test/in/";
-  const std::string TEST_OUT_DIRECTORY         = "test/out/";
+  constexpr std::string_view TEST_IN_DIR = "test/in/";
+  const std::string TEST_OUT_DIR         = "test/out/";
 
   constexpr unsigned threads = 15;
-  const auto tests           = std::count_if(std::filesystem::directory_iterator(TEST_IN_DIRECTORY),
+  const auto tests           = std::count_if(std::filesystem::directory_iterator(TEST_IN_DIR),
                                    std::filesystem::directory_iterator {},
                                    [](const auto& file) { return file.path().extension() == ".txt"; });
 
-  auto it = std::filesystem::directory_iterator(TEST_IN_DIRECTORY);
+  auto it = std::filesystem::directory_iterator(TEST_IN_DIR);
 
   unsigned started = 0u, finished = 0u;
 
@@ -164,7 +164,7 @@ int main() {
         while ((*it).path().extension() != ".txt")
           ++it;
         ifs[i]  = std::ifstream((*it).path());
-        ofs[i]  = std::ofstream(TEST_OUT_DIRECTORY + (*it).path().filename().string());
+        ofs[i]  = std::ofstream(TEST_OUT_DIR + (*it).path().filename().string());
         jobs[i] = std::thread(solve, std::ref(ifs[i]), std::ref(res[i]));
         ++started;
         running[i] = true;
