@@ -4,6 +4,7 @@
 
 *2. Windows Subsystem for Linux を利用していない場合、または Windows Subsystem for Linux の中で Windows のローカルドライブをマウントしていない場合には `makefile` の 10 行目の `OPEN = ...` の右辺を、動画や画像のファイル名を引数として与えるとそれらをビューアーで開く機能を持つ別のコマンドに変更する必要があります。他にも、C++ のソースファイルをコンパイルするコマンドを `clang++` に変更したい場合は 2 行目の `CXX = g++` を `CXX = clang++` に変更するなど、環境に応じた設定の変更が必要な場合は `makefile` の編集を行ってください。
 
+0. [このリポジトリのページ](https://github.com/naskya/heuristic-contest) にある "Use this template" と書かれたボタンをクリックし、1 つの問題に対して 1 つのリポジトリを作成します。リポジトリの fork や clone を行ってもよいですが、問題を解く際には過去のコミットを参照する必要が無いのでこの機能を使うことをおすすめします。リポジトリを public にすると、書いた解答を push した場合その内容が公開されることに注意してください。コンテスト中はリポジトリを private にしておくことをおすすめします。![リポジトリの作成画面](https://naskya.net/share/github/naskya/heuristic-contest/readme_01.png)
 1. `visualizer` ディレクトリに AtCoder 公式で提供されているビジュアライザをそのまま入れます。`visualizer` ディレクトリ直下に `Cargo.toml` がある状態にしてください。
 1. `make files=500 gen` を実行して、 `test/in` ディレクトリ内にテストケースを生成します。`files=500` の部分は生成する数の指定で、省略すると 500 個のテストケースが生成されます。このコマンドは毎回 `test/in` ディレクトリの内容を置き換えるので、テストケースの数が多すぎたり少なすぎたりした場合にはもう一度このコマンドを実行するとよいです。
 1. 解答は `src/main.cpp` に書きます。
