@@ -41,17 +41,22 @@ namespace snapshot {
 
 #define END_MAINLOOP                                                                          \
   do {                                                                                        \
-    std::unique_lock lock(snapshot::mtx);                                                     \
-    snapshot::is_paused = true;                                                               \
+    {                                                                                         \
+      std::lock_guard lock(snapshot::mtx);                                                    \
+      snapshot::is_paused = true;                                                             \
+    }                                                                                         \
     snapshot::cv.notify_one();                                                                \
+    std::unique_lock lock(snapshot::mtx);                                                     \
     snapshot::cv.wait(lock, [&] { return (!snapshot::is_paused) || snapshot::is_finished; }); \
   } while (false)
 
-#define END_SOLVE_FUNC                   \
-  do {                                   \
-    std::lock_guard lock(snapshot::mtx); \
-    snapshot::is_finished = true;        \
-    snapshot::cv.notify_one();           \
+#define END_SOLVE_FUNC                     \
+  do {                                     \
+    {                                      \
+      std::lock_guard lock(snapshot::mtx); \
+      snapshot::is_finished = true;        \
+    }                                      \
+    snapshot::cv.notify_one();             \
   } while (false)
 #else
 #define END_MAINLOOP (static_cast<void>(0))
