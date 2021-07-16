@@ -79,6 +79,7 @@ normal: $(NORMAL_OUT) $(CALC_SCORE_OUT)
 	&& cat $(TMP) \
 	&& $(VISUALIZE) $(TEST_IN_DIR)/$(case).txt $(TMP) \
 	&& $(FFMPEG) -width 1024 -i $(SVG_NAME) $(PNG_NAME) 2> /dev/null \
+	&& rm -f $(SVG_NAME) \
 	&& $(OPEN) $(PNG_NAME)
 
 debug: $(DEBUG_OUT)
@@ -100,6 +101,7 @@ mov: $(SNAPSHOT_OUT) $(CALC_SCORE_OUT)
 		$(VISUALIZE) $(TEST_IN_DIR)/$(case).txt $${file} \
 		&& $(FFMPEG) -width 1024 -i $(SVG_NAME) $(PNG_DIR)/$$(basename $${file} .txt).png 2> /dev/null; \
 	done \
+	&& rm -f $(SVG_NAME) \
 	&& $(FFMPEG) -i $(PNG_DIR)/%04d.png -vcodec libx264 $(MOV_NAME) \
 	&& $(OPEN) $(MOV_NAME) \
 	&& echo $(case) | $(PYTHON) $(UTILITY_DIR)/draw_graph.py \
