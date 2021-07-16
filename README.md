@@ -1,8 +1,9 @@
+# 注意
+
+1. 使用には [ffmpeg](http://ffmpeg.org/) のインストールが必要です。パッケージマネージャから配布されているものをそのままインストールするのではなく、ソースコードをダウンロードして `--enable-librsvg, --enable-gpl, --enable-libx264` フラグを有効化してビルドしたものを用いる必要があります。
+1. Windows Subsystem for Linux を利用していない場合、または Windows Subsystem for Linux の中で Windows のローカルドライブをマウントしていない場合には `makefile` の 10 行目の `OPEN = ...` の右辺を、動画や画像のファイル名を引数として与えるとそれらをビューアーで開く機能を持つ別のコマンドに変更する必要があります。他にも、C++ のソースファイルをコンパイルするコマンドを `clang++` に変更したい場合は 2 行目の `CXX = g++` を `CXX = clang++` に変更するなど、環境に応じた設定の変更が必要な場合は `makefile` の編集を行ってください。
+
 # 使い方
-
-*1. 使用には [ffmpeg](http://ffmpeg.org/) のインストールが必要です。パッケージマネージャから配布されているものをそのままインストールするのではなく、ソースコードをダウンロードして `--enable-librsvg, --enable-gpl, --enable-libx264` フラグを有効化してビルドしたものを用いる必要があります。
-
-*2. Windows Subsystem for Linux を利用していない場合、または Windows Subsystem for Linux の中で Windows のローカルドライブをマウントしていない場合には `makefile` の 10 行目の `OPEN = ...` の右辺を、動画や画像のファイル名を引数として与えるとそれらをビューアーで開く機能を持つ別のコマンドに変更する必要があります。他にも、C++ のソースファイルをコンパイルするコマンドを `clang++` に変更したい場合は 2 行目の `CXX = g++` を `CXX = clang++` に変更するなど、環境に応じた設定の変更が必要な場合は `makefile` の編集を行ってください。
 
 0. [このリポジトリのページ](https://github.com/naskya/heuristic-contest) にある "Use this template" と書かれたボタンをクリックし、1 つの問題に対して 1 つのリポジトリを作成します。リポジトリの fork や clone を行ってもよいですが、問題を解く際には過去のコミットを参照する必要が無いのでこの機能を使うことをおすすめします。リポジトリを public にすると、書いた解答を push した場合その内容が公開されることに注意してください。コンテスト中はリポジトリを private にしておくことをおすすめします。![リポジトリの作成画面](https://naskya.net/share/github/naskya/heuristic-contest/readme_01.png)
 1. `visualizer` ディレクトリに AtCoder 公式で提供されているビジュアライザをそのまま入れます。`visualizer` ディレクトリ直下に `Cargo.toml` がある状態にしてください。
