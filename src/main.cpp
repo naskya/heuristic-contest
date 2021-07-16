@@ -200,7 +200,7 @@ int main() {
   unsigned num                       = 0;
 
   const utility::timer tm;
-  auto prev = std::chrono::system_clock::now();
+  std::chrono::system_clock::time_point prev {};
 
   while (tm.good()) {
     {
