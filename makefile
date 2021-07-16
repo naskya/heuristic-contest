@@ -73,12 +73,12 @@ gen:
 	&& mv in/ $(TEST_IN_DIR)/
 
 normal: $(NORMAL_OUT) $(CALC_SCORE_OUT)
-	$(NORMAL_OUT) < $(TEST_IN_DIR)/$(case).txt > $(TMP) \
 	rm -f $(TMP); \
-	cat $(TMP) \
-	&& echo -n "score: " \
-	&& cat $(TEST_IN_DIR)/$(case).txt $(TMP) | $(CALC_SCORE_OUT) \
-	&& $(VISUALIZE) $(TEST_IN_DIR)/$(case).txt $(TMP) && $(FFMPEG) -width 1024 -i $(SVG_NAME) $(PNG_NAME) \
+	rm -f $(PNG_NAME); \
+	$(NORMAL_OUT) < $(TEST_IN_DIR)/$(case).txt > $(TMP) \
+	&& cat $(TMP) \
+	&& $(VISUALIZE) $(TEST_IN_DIR)/$(case).txt $(TMP) \
+	&& $(FFMPEG) -width 1024 -i $(SVG_NAME) $(PNG_NAME) 2> /dev/null \
 	&& $(OPEN) $(PNG_NAME)
 
 debug: $(DEBUG_OUT)
