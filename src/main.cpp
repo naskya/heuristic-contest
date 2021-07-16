@@ -203,27 +203,28 @@ int main() {
   auto prev = std::chrono::system_clock::now();
 
   while (tm.good()) {
-    std::unique_lock lock(snapshot::mtx);
-    snapshot::cv.wait(lock, [&] { return snapshot::is_paused || snapshot::is_finished; });
+    {
+      std::unique_lock lock(snapshot::mtx);
+      snapshot::cv.wait(lock, [&] { return snapshot::is_paused || snapshot::is_finished; });
 
-    auto now = std::chrono::system_clock::now();
+      auto now = std::chrono::system_clock::now();
 
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - prev).count() >= 10) {
-      std::ofstream ofs(SNAPSHOT_OUT_DIR + padding(num) + ".txt");
-      print(ofs, res);
-      ++num;
-      prev = now;
+      if (std::chrono::duration_cast<std::chrono::milliseconds>(now - prev).count() >= 10) {
+        std::ofstream ofs(SNAPSHOT_OUT_DIR + padding(num) + ".txt");
+        print(ofs, res);
+        ++num;
+        prev = now;
+      }
+      snapshot::is_paused = false;
     }
-
-    snapshot::is_paused = false;
     snapshot::cv.notify_one();
   }
 
   {
     std::lock_guard lock(snapshot::mtx);
     snapshot::is_finished = true;
-    snapshot::cv.notify_one();
   }
+  snapshot::cv.notify_one();
 
   job.join();
 #else
