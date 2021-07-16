@@ -19,12 +19,12 @@ def main(testcase_name):
         data[int(file[:4])] = int(os.popen("cat " + test_in +
                                            " " + out_dir + file + " | " + score_prog).read())
 
-    assert max(data) != min(data)
+    assert max(data[:files]) != min(data[:files])
 
     plt.figure(figsize=(12, 9), dpi=100)
     plt.plot([i for i in range(files)], data[:files])
-    plt.yticks(np.arange(min(data), max(data),
-                         step=(max(data) - min(data)) // 5))
+    plt.yticks(np.arange(min(data[:files]), max(data[:files]),
+                         step=(max(data[:files]) - min(data[:files])) // 5))
     plt.savefig(dirname + "/../score_graph.png")
 
 if __name__ == "__main__":
