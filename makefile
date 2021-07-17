@@ -3,7 +3,7 @@ CXX     = g++
 STD     = -std=gnu++17
 WFLAGS  = -fmax-errors=1 -Wall -Wextra -Wno-unknown-pragmas -Wcast-align -Wcast-qual -Wconversion -Wdisabled-optimization -Wdouble-promotion -Wfloat-equal -Winit-self -Winvalid-pch -Wlogical-op -Wmultichar -Wpedantic -Wredundant-decls -Wshadow -Wsign-promo -Wunused-const-variable
 OFLAGS  = -O2
-DFLAGS  = -O0 -g3 -D_GLIBCXX_DEBUG -D_FORTIFY_SOURCE=2 -ftrapv -fsanitize=address,undefined
+DFLAGS  = -O0 -g3 -D_GLIBCXX_DEBUG -D_FORTIFY_SOURCE=2 -ftrapv -fsanitize=undefined
 TFLAGS  = -pthread
 
 # command
@@ -12,6 +12,7 @@ VISUALIZE = cargo run --manifest-path $(VISUALIZER_DIR)/Cargo.toml --release --b
 GENERATE  = cargo run --manifest-path $(VISUALIZER_DIR)/Cargo.toml --release --bin gen
 PYTHON    = python3
 FFMPEG    = ffmpeg
+DEBUGGER  = gdb
 
 # directory
 TEST_IN_DIR    = test/in
@@ -84,6 +85,10 @@ normal: $(NORMAL_OUT) $(CALC_SCORE_OUT)
 
 debug: $(DEBUG_OUT)
 	$(DEBUG_OUT) < $(TEST_IN_DIR)/$(case).txt
+
+debugger: $(DEBUG_OUT)
+	$(DEBUGGER) $(DEBUG_OUT) -ex "start < $(TEST_IN_DIR)/$(case).txt"
+	@# $(DEBUGGER) $(DEBUG_OUT) -o "break set -n main" -o "process launch -i $(TEST_IN_DIR)/$(case).txt"
 
 graph: $(SNAPSHOT_OUT) $(CALC_SCORE_OUT)
 	rm -f $(GRAPH_NAME); \
