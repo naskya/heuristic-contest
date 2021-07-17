@@ -64,14 +64,15 @@ $(CALC_SCORE_OUT): $(CALC_SCORE_SRC)
 
 gen:
 	rm -f $(TMP); \
-	rm -rf $(TEST_IN_DIR); \
+	rm -f $(TEST_IN_DIR)/*; \
 	i=0 \
 	&& while [ "$$i" -lt $(files) ]; do \
 		echo "$$i" >> $(TMP) \
 		&& i=$$(( i + 1 )); \
 	done \
 	&& $(GENERATE) $(TMP) \
-	&& mv in/ $(TEST_IN_DIR)/
+	&& mv in/* $(TEST_IN_DIR)/ \
+	&& rm -rf in
 
 normal: $(NORMAL_OUT) $(CALC_SCORE_OUT)
 	rm -f $(TMP); \
