@@ -188,7 +188,7 @@ int main() {
   std::ios_base::sync_with_stdio(false);
   std::cin.tie(nullptr);
 
-  const auto padding = [](const unsigned i) {
+  const auto pad_zeros = [](const unsigned i) {
     assert(i <= 9999u);
     std::string s = "000" + std::to_string(i);
     return s.substr(std::size(s) - 4);
@@ -199,23 +199,23 @@ int main() {
 
   const std::string SNAPSHOT_OUT_DIR = "test/snapshot/";
 
-  unsigned num = 0;
+  unsigned file_num = 0;
 
   const utility::timer tm;
-  std::chrono::system_clock::time_point prev {};
+  std::chrono::system_clock::time_point prev_snapshot_time {};
 
   while (tm.good()) {
     {
       std::unique_lock lock(snapshot::mtx);
       snapshot::cv.wait(lock, [&] { return snapshot::is_paused || snapshot::is_finished; });
 
-      auto now = std::chrono::system_clock::now();
+      auto current_time = std::chrono::system_clock::now();
 
-      if (std::chrono::duration_cast<std::chrono::milliseconds>(now - prev).count() >= 10) {
-        std::ofstream ofs(SNAPSHOT_OUT_DIR + padding(num) + ".txt");
+      if (std::chrono::duration_cast<std::chrono::milliseconds>(current_time - prev_snapshot_time).count() >= 10) {
+        std::ofstream ofs(SNAPSHOT_OUT_DIR + pad_zeros(file_num) + ".txt");
         print(ofs, res);
-        ++num;
-        prev = now;
+        ++file_num;
+        prev_snapshot_time = current_time;
       }
       snapshot::is_paused = false;
     }
