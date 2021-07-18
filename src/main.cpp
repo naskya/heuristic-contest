@@ -139,7 +139,7 @@ int main() {
 
   auto it = std::filesystem::directory_iterator(TEST_IN_DIR);
 
-  unsigned started = 0u, finished = 0u;
+  unsigned started = 0, finished = 0;
 
   std::array<std::thread, threads> jobs;
   std::array<std::ifstream, threads> ifs;
@@ -152,7 +152,7 @@ int main() {
     std::lock_guard lock(parallel::mtx);
     const auto bar_top = bar_length * finished / tests;
     os << "[\033[92m";
-    for (unsigned j = 0u; j < bar_length; ++j)
+    for (unsigned j = 0; j < bar_length; ++j)
       os << (j <= bar_top ? '#' : ' ');
     os << "\033[39m] " << (100 * bar_top / bar_length) << "% (" << finished << '/' << tests << ')';
     if (tests == finished)
@@ -164,7 +164,7 @@ int main() {
   show_progress();
 
   while (finished < tests) {
-    for (unsigned i = 0u; i < threads; ++i) {
+    for (unsigned i = 0; i < threads; ++i) {
       if (!running[i] && started < tests) {
         std::lock_guard lock(parallel::mtx);
         while ((*it).path().extension() != ".txt")
@@ -189,7 +189,7 @@ int main() {
   std::cin.tie(nullptr);
 
   const auto padding = [](const unsigned i) {
-    assert(i <= 9999);
+    assert(i <= 9999u);
     std::string s = "000" + std::to_string(i);
     return s.substr(std::size(s) - 4);
   };
@@ -198,7 +198,8 @@ int main() {
   std::thread job(solve, std::ref(std::cin), std::ref(res));
 
   const std::string SNAPSHOT_OUT_DIR = "test/snapshot/";
-  unsigned num                       = 0;
+
+  unsigned num = 0;
 
   const utility::timer tm;
   std::chrono::system_clock::time_point prev {};
