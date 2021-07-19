@@ -66,13 +66,13 @@ namespace snapshot {
 #pragma endregion
 
 namespace utility {
-  constexpr unsigned time_limit = 2000 - 20;
-
   struct timer {
     private:
     const std::chrono::system_clock::time_point start;
 
     public:
+    static constexpr unsigned time_limit = 2000 - 20;
+
     timer() noexcept : start(std::chrono::system_clock::now()) {}
 
     [[nodiscard]] auto elapsed() const {
