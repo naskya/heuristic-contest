@@ -43,7 +43,7 @@
 
 # 注意
 
-- Windows Subsystem for Linux を利用していない場合、または Windows Subsystem for Linux を利用していて Windows のローカルドライブをマウントしていない場合には `makefile` の 10 行目の `OPEN = ...` の右辺を、動画や画像のファイル名を引数として与えるとそれらをビューアーで開く機能を持つ別のコマンドに変更する必要があります。
+- Windows Subsystem for Linux を利用していない場合、または Windows Subsystem for Linux を利用していて Windows のローカルドライブをマウントしていない場合には `Makefile` の 10 行目の `OPEN = ...` の右辺を、動画や画像のファイル名を引数として与えるとそれらをビューアーで開く機能を持つ別のコマンドに変更する必要があります。
 - 解をビジュアライズして表示する機能を使用するには [ffmpeg](http://ffmpeg.org/) のインストールが必要です。パッケージマネージャからインストールできるものをそのままインストールするのではなく、ソースコードをダウンロードして `--enable-librsvg, --enable-gpl, --enable-libx264` フラグを有効化してビルドしたものを用いる必要があります。
-- デバッガ上でプログラムを実行する機能を使用するには [GDB](https://www.gnu.org/software/gdb/) または [LLDB](https://lldb.llvm.org/) のインストールが必要です。LLDB を使用する場合は `makefile` の 15 行目の `DEBUGGER = gdb` の右辺を LLDB を起動するコマンド (`lldb` など) に書き換え、91 行目をコメントアウトして 92 行目のコメントアウトを解除してください。
-- C++ のソースファイルをコンパイルするコマンドを `clang++` に変更したい場合は 2 行目の `CXX = g++` を `CXX = clang++` に変更するなど、他にも設定の変更が必要な場合は `makefile` の編集を行ってください。
+- デバッガ上でプログラムを実行する機能を使用するには [GDB](https://www.gnu.org/software/gdb/) または [LLDB](https://lldb.llvm.org/) のインストールが必要です。LLDB を使用する場合は `Makefile` の 15 行目の `DEBUGGER = gdb` の右辺を LLDB を起動するコマンド (`lldb` など) に書き換え、91 行目をコメントアウトして 92 行目のコメントアウトを解除してください。
+- C++ のソースファイルをコンパイルするコマンドを `clang++` に変更したい場合は 2 行目の `CXX = g++` を `CXX = clang++` に変更するなど、他にも設定の変更が必要な場合は `Makefile` の編集を行ってください。
