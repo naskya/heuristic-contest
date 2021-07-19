@@ -1,7 +1,6 @@
 #pragma region template
 #include <chrono>
 #include <iostream>
-#include <random>
 
 #ifdef PARALLEL
 #include <algorithm>
@@ -88,18 +87,6 @@ namespace utility {
       return elapsed() < time_limit;
     }
   };
-
-  struct random_number_generator {
-    private:
-    std::mt19937_64 engine;
-
-    public:
-    random_number_generator() : engine(std::random_device {}()) {}
-
-    template <class Dist>[[nodiscard]] auto operator()(Dist dist) {
-      return dist(engine);
-    }
-  };
 }  // namespace utility
 
 struct result {
@@ -110,7 +97,6 @@ void print(std::ostream& os, const result& res) {
 
 void solve(std::istream& is, result& res) {
   const utility::timer tm;
-  utility::random_number_generator rng;
 
   // declare variables
   // int N, ...;
