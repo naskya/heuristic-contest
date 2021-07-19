@@ -23,7 +23,9 @@ template <class Func> void safe_invoke(const Func& f) {
   f();
 }
 #else
-template <class Func> void safe_invoke(const Func& f) { f(); }
+template <class Func> void safe_invoke(const Func& f) {
+  f();
+}
 #endif  // PARALLEL
 
 #ifdef SNAPSHOT
@@ -79,12 +81,12 @@ namespace utility {
       using namespace std::chrono;
       return duration_cast<milliseconds>(system_clock::now() - start).count();
     }
-
     template <unsigned num, unsigned den>[[nodiscard]] bool frac() const {
       return elapsed() < time_limit * num / den;
     }
-
-    [[nodiscard]] bool good() const { return elapsed() < time_limit; }
+    [[nodiscard]] bool good() const {
+      return elapsed() < time_limit;
+    }
   };
 
   struct random_number_generator {
@@ -94,7 +96,9 @@ namespace utility {
     public:
     random_number_generator() : engine(std::random_device {}()) {}
 
-    template <class Dist>[[nodiscard]] auto operator()(Dist dist) { return dist(engine); }
+    template <class Dist>[[nodiscard]] auto operator()(Dist dist) {
+      return dist(engine);
+    }
   };
 }  // namespace utility
 
@@ -133,7 +137,8 @@ int main() {
   const std::string TEST_OUT_DIR         = "test/out/";
 
   constexpr unsigned threads = 15;
-  const auto tests           = std::count_if(std::filesystem::directory_iterator(TEST_IN_DIR),
+
+  const auto tests = std::count_if(std::filesystem::directory_iterator(TEST_IN_DIR),
                                    std::filesystem::directory_iterator {},
                                    [](const auto& file) { return file.path().extension() == ".txt"; });
 
@@ -232,6 +237,7 @@ int main() {
 #else
   std::ios_base::sync_with_stdio(false);
   std::cin.tie(nullptr);
+
   result res;
   solve(std::cin, res);
   print(std::cout, res);

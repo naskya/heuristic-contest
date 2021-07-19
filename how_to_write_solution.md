@@ -4,7 +4,7 @@
 
 # `src/main.cpp` で定義されているクラス
 
-## `utility::timer` (69 行目)
+## `utility::timer` (71 行目)
 
 実行時間を計るために使うクラスです。`solve` 関数の先頭でこの型のオブジェクトを構築して計測を開始します。
 
@@ -51,7 +51,7 @@ std::this_thread::sleep_for(std::chrono::milliseconds(300));
 auto t = tm.elapsed();  // t は 300 に近い値
 ```
 
-## `utility::random_number_generator` (90 行目)
+## `utility::random_number_generator` (92 行目)
 
 乱数生成に使用するクラスです。`operator ()` の引数に乱数の分布を与えると乱数が得られます。
 
@@ -67,15 +67,15 @@ auto r1 = rng(dist_i);  // r1 は 0 以上 100 以下の int 型の値
 auto r2 = rng(dist_d);  // r2 は 0 以上 1 未満の double 型の値
 ```
 
-## `result` (101 行目)
+## `result` (105 行目)
 
 解として出力するものを保持するクラスです。
 
 # 解答の手順
 
-1. 74 行目の `time_limit` の値を問題の実行時間制限に合わせて変更します(単位は ms)。20 ms 程度は余裕を持たせることをおすすめします。
-1. 135 行目の `threads` の値を使っている PC に搭載されている CPU のスレッド数(またはそれより少し小さい数)に変更します。
-1. 101 行目の `struct result` が解答として出力する内容を表すようにコードを編集します。例えば [AHC001](https://atcoder.jp/contests/ahc001/tasks/ahc001_a) では出力するものが 4 つの数の配列なので
+1. 76 行目の `time_limit` の値を問題の実行時間制限に合わせて変更します(単位は ms)。20 ms 程度は余裕を持たせることをおすすめします。
+1. 139 行目の `threads` の値を使っている PC に搭載されている CPU のスレッド数(またはそれより少し小さい数)に変更します。
+1. 105 行目の `struct result` が解答として出力する内容を表すようにコードを編集します。例えば [AHC001](https://atcoder.jp/contests/ahc001/tasks/ahc001_a) では出力するものが 4 つの数の配列なので
    ```C++
    struct result {
      std::vector<int> a, b, c, d;
