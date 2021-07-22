@@ -162,6 +162,7 @@ int main() {
           ++it;
         ifs[i]  = std::ifstream((*it).path());
         ofs[i]  = std::ofstream(TEST_OUT_DIR + (*it).path().filename().string());
+        res[i]  = result {};
         jobs[i] = std::thread(solve, std::ref(ifs[i]), std::ref(res[i]));
         ++started;
         running[i] = true;
