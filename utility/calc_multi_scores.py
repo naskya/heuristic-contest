@@ -36,9 +36,9 @@ def main():
 
     assert tests > 0
 
-    print("lowest : ", f"{score_min:,}", "(" + min_case + ")")
-    print("highest: ", f"{score_max:,}", "(" + max_case + ")")
-    print("average: ", f"{score_sum // tests:,}")
+    print("lowest  :", f"{score_min:,}", "(" + min_case + ")")
+    print("highest :", f"{score_max:,}", "(" + max_case + ")")
+    print("average :", f"{score_sum // tests:,}")
 
     plt.figure(figsize=(12, 9), dpi=100)
     plt.hist(scores, bins="auto", ec="black")

@@ -142,7 +142,7 @@ int main() {
   const auto show_progress = [&, bar_length = 50u, &os = std::cerr] {
     std::lock_guard lock(parallel::mtx);
     const auto bar_top = bar_length * finished / tests;
-    os << "[\033[92m";
+    os << "progress: [\033[92m";
     for (unsigned j = 0; j < bar_length; ++j)
       os << (j <= bar_top ? '#' : ' ');
     os << "\033[39m] " << (100 * bar_top / bar_length) << "% (" << finished << '/' << tests << ')';
