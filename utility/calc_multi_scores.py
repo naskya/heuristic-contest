@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import os
 
 def main():
@@ -7,6 +8,8 @@ def main():
     score_prog = dirname + "/calc_score.out"
 
     tests = 0
+
+    scores    = []
     score_min = int(1e18)
     score_max = int(-1e18)
     score_sum = 0
@@ -22,6 +25,7 @@ def main():
         score = int(os.popen("cat " + in_dir + file + " " +
                              out_dir + file + " | " + score_prog).read())
         score_sum += score
+        scores.append(score)
 
         if score < score_min:
             score_min = score
@@ -35,6 +39,10 @@ def main():
     print("lowest : ", f"{score_min:,}", "(" + min_case + ")")
     print("highest: ", f"{score_max:,}", "(" + max_case + ")")
     print("average: ", f"{score_sum // tests:,}")
+
+    plt.figure(figsize=(12, 9), dpi=100)
+    plt.hist(scores, bins="auto", ec="black")
+    plt.savefig(dirname + "/../score_dist.png")
 
 if __name__ == "__main__":
     main()

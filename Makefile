@@ -33,6 +33,7 @@ SVG_NAME   = out.svg
 PNG_NAME   = out.png
 MOV_NAME   = vis.mov
 GRAPH_NAME = score_graph.png
+DIST_NAME  = score_dist.png
 TMP        = tmp.txt
 
 # executable
@@ -115,5 +116,7 @@ mov: $(SNAPSHOT_OUT) $(CALC_SCORE_OUT)
 
 multi: $(PARALLEL_OUT) $(CALC_SCORE_OUT)
 	rm -f $(TEST_OUT_DIR)/*; \
+	rm -f $(DIST_NAME); \
 	$(PARALLEL_OUT) \
-	&& $(PYTHON) $(UTILITY_DIR)/calc_multi_scores.py
+	&& $(PYTHON) $(UTILITY_DIR)/calc_multi_scores.py \
+	&& $(OPEN) $(DIST_NAME)
