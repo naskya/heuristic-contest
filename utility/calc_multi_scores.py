@@ -5,7 +5,7 @@ def main():
     dirname = os.path.dirname(os.path.abspath(__file__))
     in_dir = dirname + "/../test/in/"
     out_dir = dirname + "/../test/out/"
-    score_prog = dirname + "/calc_score.out"
+    score_prog = dirname + "/../executable/calc_score.out"
 
     tests = 0
 

@@ -41,7 +41,7 @@ NORMAL_OUT     = $(EXECUTABLE_DIR)/normal.out
 DEBUG_OUT      = $(EXECUTABLE_DIR)/debug.out
 PARALLEL_OUT   = $(EXECUTABLE_DIR)/parallel.out
 SNAPSHOT_OUT   = $(EXECUTABLE_DIR)/snapshot.out
-CALC_SCORE_OUT = $(UTILITY_DIR)/calc_score.out
+CALC_SCORE_OUT = $(EXECUTABLE_DIR)/calc_score.out
 
 # default
 case  = 0000
