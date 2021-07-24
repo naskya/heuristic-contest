@@ -4,7 +4,7 @@ import os
 
 def main(testcase_name):
     dirname = os.path.dirname(os.path.abspath(__file__))
-    test_in = dirname + "/../test/in/" + testcase_name + ".txt"
+    in_dir = dirname + "/../test/in/" + testcase_name + ".txt"
     out_dir = dirname + "/../test/snapshot/"
     score_prog = dirname + "/../executable/calc_score.out"
     files = len(os.listdir(out_dir))
@@ -16,7 +16,7 @@ def main(testcase_name):
             files -= 1
             continue
         # int("0000.txt"[:4]) = int("0000") = 0
-        data[int(file[:4])] = int(os.popen("cat " + test_in +
+        data[int(file[:4])] = int(os.popen("cat " + in_dir +
                                            " " + out_dir + file + " | " + score_prog).read())
 
     assert max(data[:files]) != min(data[:files])
