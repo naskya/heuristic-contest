@@ -41,6 +41,9 @@ def main():
     print("average :", f"{score_sum // tests:,}")
 
     plt.figure(figsize=(12, 9), dpi=100)
+    plt.title("Score distribution", fontsize=25)
+    plt.xlabel("score", fontsize=20)
+    plt.ylabel("frequency", fontsize=20)
     plt.hist(scores, bins="auto", ec="black")
     plt.savefig(dirname + "/../score_dist.png")
 

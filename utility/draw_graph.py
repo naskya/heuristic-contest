@@ -22,6 +22,9 @@ def main(testcase_name):
     assert max(data[:files]) != min(data[:files])
 
     plt.figure(figsize=(12, 9), dpi=100)
+    plt.title("Score changes", fontsize=25)
+    plt.xlabel("time [10 ms]", fontsize=20)
+    plt.ylabel("score", fontsize=20)
     plt.plot([i for i in range(files)], data[:files])
     plt.yticks(np.arange(min(data[:files]), max(data[:files]),
                          step=(max(data[:files]) - min(data[:files])) // 5))
